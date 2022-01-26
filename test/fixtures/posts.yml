@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  pay: 9.99
+  closed: false
+  description: MyText
+  start: 1
+  owner: MyString
+
+two:
+  title: MyString
+  pay: 9.99
+  closed: false
+  description: MyText
+  start: 1
+  owner: MyString
