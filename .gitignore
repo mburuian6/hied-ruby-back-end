@@ -104,6 +104,5 @@ config/credentials/staging.key
 .keep
 
 # Ignore uploaded files in development
-/storage/*
-!/storage/.keep
+/storage/.keep
 
