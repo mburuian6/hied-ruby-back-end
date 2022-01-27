@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   root "posts#index"
 
   resources :posts do
-    put mark_post_as_closed, on: member
+    put :mark_post_as_closed, on: :member
   end
 end
