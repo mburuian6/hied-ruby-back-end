@@ -38,7 +38,7 @@ class BidsController < ApplicationController
     @bid.destroy
   end
 
-  def getOpenPostBids
+  def open_post_bids
     post = params[:postId]
     bids = Bid.where(post_id: post)
     PostSerializer.to_collection(bids)
