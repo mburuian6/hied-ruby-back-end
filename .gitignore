@@ -106,3 +106,4 @@ config/credentials/staging.key
 # Ignore uploaded files in development
 /storage/.keep
 
+TODO.txt
