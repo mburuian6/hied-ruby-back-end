@@ -38,6 +38,12 @@ class BidsController < ApplicationController
     @bid.destroy
   end
 
+  def getOpenPostBids
+    post = params[:postId]
+    bids = Bid.where(post_id: post)
+    bids
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bid
