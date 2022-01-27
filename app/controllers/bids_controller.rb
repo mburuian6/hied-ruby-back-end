@@ -45,13 +45,14 @@ class BidsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bid
-      @bid = Bid.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bid_params
-      params.require(:bid).permit(:pay, :notes, :post_id, :owner)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bid
+    @bid = Bid.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bid_params
+    params.require(:bid).permit(:pay, :notes, :post_id, :owner)
+  end
 end
