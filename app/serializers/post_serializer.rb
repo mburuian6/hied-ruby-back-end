@@ -3,7 +3,13 @@ class PostSerializer
   extend HALPresenter
 
   attribute :title
-
+  attribute :pay
+  attribute :closed
+  attribute :description
+  attribute :start
+  attribute :owner
+  attribute :created_at
+  attribute :updated_at
 
   link :self do
     "/posts/#{resource.id}"
