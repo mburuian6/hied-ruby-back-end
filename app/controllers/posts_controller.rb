@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.find_by(closed: false)
 
     render json: PostSerializer.to_collection(@posts)
   end
