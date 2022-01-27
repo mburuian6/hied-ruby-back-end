@@ -18,7 +18,7 @@ class BidsController < ApplicationController
     @bid = Bid.new(bid_params)
 
     if @bid.save
-      render json: @bid, status: :created, location: @bid
+      render json: BidSerializer.to_hal(@bid), status: :created, location: @bid
     else
       render json: @bid.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class BidsController < ApplicationController
   # PATCH/PUT /bids/1
   def update
     if @bid.update(bid_params)
-      render json: @bid
+      render json: BidSerializer.to_hal(@bid)
     else
       render json: @bid.errors, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class BidsController < ApplicationController
   def getOpenPostBids
     post = params[:postId]
     bids = Bid.where(post_id: post)
-    bids
+    PostSerializer.to_collection(bids)
   end
 
   private
