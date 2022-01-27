@@ -13,5 +13,15 @@ class BidSerializer
     "/bids/#{resource.id}"
   end
 
+  collection of: 'bids' do
+    attribute(:count) { resources.count }
+    link :self do
+      format "/bids%s", (options[:page] && "?page=#{options[:page]}")
+    end
+    link :next do
+      "/bids?page=#{options[:next]}" if options[:next]
+    end
+  end
+
 end
 
