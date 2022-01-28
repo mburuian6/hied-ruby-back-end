@@ -16,6 +16,17 @@ class BidsController < ApplicationController
   # POST /bids
   def create
     @bid = Bid.new(bid_params)
+    potential_bid = Bid.find_by(owner: @bid.owner, post_id: @bid.post_id)
+    puts 'found it!'
+    if potential_bid
+      if potential_bid.update(pay: @bid.pay, notes: @bid.notes)
+        puts 'saved it!'
+        render json: BidSerializer.to_hal(potential_bid)
+      else
+        render json: potential_bid.errors, status: :unprocessable_entity
+      end
+      return
+    end
 
     if @bid.save
       render json: BidSerializer.to_hal(@bid), status: :created, location: @bid
