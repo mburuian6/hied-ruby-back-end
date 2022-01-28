@@ -61,6 +61,7 @@ class BidsController < ApplicationController
     bids.each do |bid|
       if bid.id == accepted_bid_id
         bid.update(accepted: true)
+        bid_notification = create_bid_notifications(bid)
       else
         create_rejected_bid(bid.attributes)
         Bid.destroy(bid.id)
@@ -79,5 +80,13 @@ class BidsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def bid_params
     params.require(:bid).permit(:pay, :notes, :post_id, :owner)
+  end
+  def create_bid_notifications(bid)
+    Notification.create(
+      subject: "Bid for Post #{bid.post.hash_id} accepted",
+      message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
+          "been accepted. Please contact #{bid.post.owner} for arrangements",
+      owner: bid.owner
+    )
   end
 end
