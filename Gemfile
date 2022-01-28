@@ -41,6 +41,7 @@ gem "rack-cors"
 #HATEOAS
 gem 'hal_presenter'
 
+gem 'rubocop'
 # END
 
 group :development, :test do
