@@ -66,6 +66,7 @@ class BidsController < ApplicationController
       else
         create_rejected_bid(bid.attributes)
         Bid.destroy(bid.id)
+        create_rejection_notifications(bid)
       end
       render json: nil, status: :ok
     end
@@ -82,6 +83,7 @@ class BidsController < ApplicationController
   def bid_params
     params.require(:bid).permit(:pay, :notes, :post_id, :owner)
   end
+
   def create_bid_notifications(bid)
     Notification.create(
       subject: "Bid for Post #{bid.post.hash_id} accepted",
@@ -100,5 +102,18 @@ class BidsController < ApplicationController
       notification_references: [bid_notification.id]
     )
     bid_notification.update(notification_references: [post_notification.id])
+  end
+
+  def create_rejection_notifications(bid)
+    Notification.create(
+      subject: "Bid for Post #{bid.post.hash_id} rejected",
+      message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
+          "been rejected. We wish you better luck next time!",
+      owner: bid.owner
+    )
+  end
+
+  def create_rejected_bid(attributes)
+    RejectedBid.create(attributes)
   end
 end
