@@ -38,10 +38,16 @@ gem "rack-cors"
 
 
 # ADDITIONAL
-#HATEOAS
+# HATEOAS
 gem 'hal_presenter'
 
 gem 'rubocop'
+
+# Docs
+gem 'yard'
+
+#Hash Ids
+gem 'hashids'
 # END
 
 group :development, :test do
