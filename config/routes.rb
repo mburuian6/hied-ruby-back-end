@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     put :mark_post_as_closed, on: :member
   end
 
-  resources :bids, only: %i[create update destroy] do
-    get :getOpenPostBids, on: :collection
+  resources :bids, only: %i[create update destroy open_post_bids] do
+    get :open_post_bids, on: :collection
   end
 end
