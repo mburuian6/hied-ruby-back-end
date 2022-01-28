@@ -1,3 +1,4 @@
+require 'manage_hash_ids'
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
 
@@ -18,6 +19,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
+      @post.update(hash_id: ManageHashIds.encode(@post.id))
       render json: PostSerializer.to_hal(@post), status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity
