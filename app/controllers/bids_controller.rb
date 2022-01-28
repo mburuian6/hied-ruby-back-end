@@ -62,6 +62,7 @@ class BidsController < ApplicationController
       if bid.id == accepted_bid_id
         bid.update(accepted: true)
         bid_notification = create_bid_notifications(bid)
+        create_post_notifications(bid,bid_notification)
       else
         create_rejected_bid(bid.attributes)
         Bid.destroy(bid.id)
@@ -88,5 +89,16 @@ class BidsController < ApplicationController
           "been accepted. Please contact #{bid.post.owner} for arrangements",
       owner: bid.owner
     )
+  end
+
+  def create_post_notifications(bid, bid_notification)
+    post_notification = Notification.create(
+      subject: "Accepted bid for Post #{bid.post.hash_id}",
+      message: "You have successfully accepted the bid for post title #{bid.post.title}, marker: #{bid.post.hash_id}; "\
+          "Please contact #{bid.post.title} for arrangements",
+      owner: bid.post.owner,
+      notification_references: [bid_notification.id]
+    )
+    bid_notification.update(notification_references: [post_notification.id])
   end
 end
