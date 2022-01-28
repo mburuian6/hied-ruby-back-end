@@ -41,7 +41,7 @@ class BidsController < ApplicationController
   def open_post_bids
     post = params[:post_id]
     bids = Bid.where(post_id: post)
-    PostSerializer.to_collection(bids)
+    render json: BidSerializer.to_collection(bids)
   end
 
   private
