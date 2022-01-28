@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_134239) do
+ActiveRecord::Schema.define(version: 2022_01_28_112354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 2022_01_27_134239) do
     t.decimal "pay", default: "0.0"
     t.boolean "closed", default: false
     t.text "description", default: "New Description"
-    t.integer "start", default: 1643212136
     t.string "owner"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "start", precision: 6, default: "2022-01-28 11:42:25", null: false
   end
 
   add_foreign_key "bids", "posts"
