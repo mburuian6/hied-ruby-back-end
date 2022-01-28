@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_112354) do
+ActiveRecord::Schema.define(version: 2022_01_28_120353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,5 +37,16 @@ ActiveRecord::Schema.define(version: 2022_01_28_112354) do
     t.datetime "start", precision: 6, default: "2022-01-28 11:42:25", null: false
   end
 
+  create_table "rejected_bids", force: :cascade do |t|
+    t.decimal "pay"
+    t.text "notes"
+    t.bigint "post_id", null: false
+    t.string "owner"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_rejected_bids_on_post_id"
+  end
+
   add_foreign_key "bids", "posts"
+  add_foreign_key "rejected_bids", "posts"
 end
