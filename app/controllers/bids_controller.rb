@@ -55,6 +55,20 @@ class BidsController < ApplicationController
     render json: BidSerializer.to_collection(bids)
   end
 
+  def accept_bid
+    bids = Bid.where(post_id: params[:post_id])
+    accepted_bid_id = params[:bid_id]
+    bids.each do |bid|
+      if bid.id == accepted_bid_id
+        bid.update(accepted: true)
+      else
+        create_rejected_bid(bid.attributes)
+        Bid.destroy(bid.id)
+      end
+      render json: nil, status: :ok
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
