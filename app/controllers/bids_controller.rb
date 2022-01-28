@@ -39,7 +39,7 @@ class BidsController < ApplicationController
   end
 
   def open_post_bids
-    post = params[:postId]
+    post = params[:post_id]
     bids = Bid.where(post_id: post)
     PostSerializer.to_collection(bids)
   end
