@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :rejected_bids
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -12,4 +11,11 @@ Rails.application.routes.draw do
   resources :bids, only: %i[create update destroy open_post_bids] do
     get :open_post_bids, on: :collection
   end
+
+  resources :rejected_bids, only: []
+
+  resources :notifications, only:[] do
+
+  end
+
 end
