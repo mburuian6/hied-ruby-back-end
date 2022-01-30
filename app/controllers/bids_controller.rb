@@ -87,22 +87,24 @@ class BidsController < ApplicationController
     params.require(:bid).permit(:pay, :notes, :post_id, :owner)
   end
 
-  def create_bid_notifications(bid)
+  def create_accept_notifications(bid)
     Notification.create(
       subject: "Bid for Post #{bid.post.hash_id} accepted",
       message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
           "been accepted. Please contact #{bid.post.owner} for arrangements",
-      owner: bid.owner
+      owner: bid.owner,
+      data: { bid: bid.hash_id }
     )
   end
 
   def create_post_notifications(bid, bid_notification)
     post_notification = Notification.create(
       subject: "Accepted bid for Post #{bid.post.hash_id}",
-      message: "You have successfully accepted the bid for post title #{bid.post.title}, marker: #{bid.post.hash_id}; "\
+      message: "You have successfully accepted the bid #{bid.hash_id} for post title #{bid.post.title}, marker: #{bid.post.hash_id}; "\
           "Please contact #{bid.post.title} for arrangements",
       owner: bid.post.owner,
-      notification_references: [bid_notification.id]
+      notification_references: [bid_notification.id],
+      data: { post: bid.post.hash_id }
     )
     bid_notification.update(notification_references: [post_notification.id])
   end
@@ -112,7 +114,8 @@ class BidsController < ApplicationController
       subject: "Bid for Post #{bid.post.hash_id} rejected",
       message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
           "been rejected. We wish you better luck next time!",
-      owner: bid.owner
+      owner: bid.owner,
+      data: { bid: bid.hash_id }
     )
   end
 
