@@ -8,6 +8,7 @@ class PostSerializer
   attribute :description
   attribute :start
   attribute :owner
+  attribute :hash_id
   attribute :created_at
   attribute :updated_at
 
