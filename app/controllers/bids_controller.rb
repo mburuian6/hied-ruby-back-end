@@ -66,9 +66,9 @@ class BidsController < ApplicationController
         create_post_notifications(bid, bid_notification)
       else
         create_rejected_bid(bid.attributes)
-        Bid.destroy(bid.id)
         create_rejection_notifications(bid)
       end
+      Bid.destroy(bid.id)
     end
     post.mark_post_as_closed
     render json: nil, status: :ok
