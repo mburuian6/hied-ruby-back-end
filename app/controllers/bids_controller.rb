@@ -115,6 +115,12 @@ class BidsController < ApplicationController
     )
   end
 
+  def create_accepted_bid(attributes)
+    AcceptedBid.create(
+      attributes.except('accepted', 'id', 'created_at', 'updated_at')
+    )
+  end
+
   def create_rejected_bid(attributes)
     RejectedBid.create(
       attributes.except('accepted', 'id', 'created_at', 'updated_at')
