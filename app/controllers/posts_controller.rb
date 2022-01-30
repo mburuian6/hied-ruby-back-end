@@ -40,17 +40,6 @@ class PostsController < ApplicationController
     @post.destroy
   end
 
-  def mark_post_as_closed
-    post_id = params[:postId]
-    @post = Post.find(post_id)
-    @post.update(closed: true)
-    if @post.save
-      render json: PostSerializer.to_hal(@post)
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
-  end
-
   def closed_posts; end
 
   def open_posts; end
