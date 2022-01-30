@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_095506) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "owner", null: false
     t.text "notification_references", default: [], array: true
+    t.jsonb "data", default: {}
   end
 
   create_table "posts", force: :cascade do |t|
