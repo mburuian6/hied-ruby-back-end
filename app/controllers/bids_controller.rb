@@ -63,7 +63,7 @@ class BidsController < ApplicationController
       if bid.id == accepted_bid_id
         bid.update(accepted: true)
         bid_notification = create_bid_notifications(bid)
-        create_post_notifications(bid,bid_notification)
+        create_post_notifications(bid, bid_notification)
       else
         create_rejected_bid(bid.attributes)
         Bid.destroy(bid.id)
