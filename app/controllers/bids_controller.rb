@@ -1,3 +1,4 @@
+require 'manage_hash_ids'
 class BidsController < ApplicationController
   before_action :set_bid, only: %i[ show update destroy ]
 
@@ -17,10 +18,8 @@ class BidsController < ApplicationController
   def create
     @bid = Bid.new(bid_params)
     potential_bid = Bid.find_by(owner: @bid.owner, post_id: @bid.post_id)
-    puts 'found it!'
     if potential_bid
       if potential_bid.update(pay: @bid.pay, notes: @bid.notes)
-        puts 'saved it!'
         render json: BidSerializer.to_hal(potential_bid)
       else
         render json: potential_bid.errors, status: :unprocessable_entity
@@ -29,6 +28,7 @@ class BidsController < ApplicationController
     end
 
     if @bid.save
+      @bid.update(hash_id: ManageHashIds.encode_bid(@bid.id))
       render json: BidSerializer.to_hal(@bid), status: :created, location: @bid
     else
       render json: @bid.errors, status: :unprocessable_entity
@@ -63,7 +63,7 @@ class BidsController < ApplicationController
       if bid.id.to_s == accepted_bid_id
         bid.accepted = true
         create_accepted_bid(bid.attributes)
-        bid_notification = create_bid_notifications(bid)
+        bid_notification = create_accept_notifications(bid)
         create_post_notifications(bid, bid_notification)
       else
         create_rejected_bid(bid.attributes)
