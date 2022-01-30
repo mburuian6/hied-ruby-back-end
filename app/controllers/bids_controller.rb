@@ -56,7 +56,7 @@ class BidsController < ApplicationController
   end
 
   def accept_bid
-    post = Post.find(params[:postId])
+    post = Post.find(params[:post_id])
     accepted_bid_id = params[:bid_id]
     bids = post.bids
     bids.each do |bid|
