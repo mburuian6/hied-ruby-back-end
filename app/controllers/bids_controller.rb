@@ -56,8 +56,9 @@ class BidsController < ApplicationController
   end
 
   def accept_bid
-    bids = Bid.where(post_id: params[:post_id])
+    post = Post.find(params[:postId])
     accepted_bid_id = params[:bid_id]
+    bids = post.bids
     bids.each do |bid|
       if bid.id == accepted_bid_id
         bid.update(accepted: true)
