@@ -61,7 +61,8 @@ class BidsController < ApplicationController
     bids = post.bids
     bids.each do |bid|
       if bid.id.to_s == accepted_bid_id
-        bid.update(accepted: true)
+        bid.accepted = true
+        create_accepted_bid(bid.attributes)
         bid_notification = create_bid_notifications(bid)
         create_post_notifications(bid, bid_notification)
       else
