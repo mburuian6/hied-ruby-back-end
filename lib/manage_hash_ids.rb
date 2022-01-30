@@ -1,7 +1,7 @@
 module ManageHashIds
   class << self
     def encode(obj_id, min_hash_length: 10)
-      generate_hash(min_hash_length: min_hash_length).encode(str)
+      generate_hash(min_hash_length: min_hash_length).encode(obj_id.to_s)
     end
 
     def decode(str, min_hash_length)
