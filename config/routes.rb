@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -14,8 +15,9 @@ Rails.application.routes.draw do
 
   resources :rejected_bids, only: []
 
-  resources :notifications, only:[] do
+  resources :accepted_bids, only: []
 
+  resources :notifications, only: [] do
   end
 
 end
