@@ -71,6 +71,8 @@ class BidsController < ApplicationController
       end
       render json: nil, status: :ok
     end
+    post.mark_post_as_closed
+    render json: nil, status: :ok
   end
 
   private
