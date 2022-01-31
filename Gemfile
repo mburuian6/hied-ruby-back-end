@@ -48,6 +48,9 @@ gem 'yard'
 
 #Hash Ids
 gem 'hashids'
+
+#Asyncronous processing
+gem 'sidekiq', '~>6.4.0'
 # END
 
 group :development, :test do
