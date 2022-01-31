@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :posts do
   end
 
+  resources :post_links do
+
+  end
+
   resources :bids, only: %i[create update destroy open_post_bids] do
     get :open_post_bids, on: :collection
     put :accept_bid, on: :collection
