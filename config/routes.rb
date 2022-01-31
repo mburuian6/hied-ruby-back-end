@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 
   resources :accepted_bids, only: []
 
-  resources :notifications, only: [] do
+  resources :notifications, only: %i[all_notifications] do
+    get :all_notifications, on: :collection
   end
 
 end

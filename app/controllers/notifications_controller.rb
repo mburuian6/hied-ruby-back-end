@@ -38,6 +38,13 @@ class NotificationsController < ApplicationController
     @notification.destroy
   end
 
+  def all_notifications
+    owner = params[:owner]
+    render json: NotificationSerializer.to_collection(
+      Notification.order(:updated_at).where(owner: owner)
+    )
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_notification
