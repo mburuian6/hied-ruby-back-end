@@ -20,6 +20,12 @@ class PostsController < ApplicationController
 
     if @post.save
       @post.update(hash_id: ManageHashIds.encode(@post.id))
+      PostLink.create({
+                        domain: Rails.application.credentials.domain,
+                        path: '/post_links/post/',
+                        post_marker: @post.hash_id,
+                        post_id: @post.id
+                      })
       render json: PostSerializer.to_hal(@post), status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity

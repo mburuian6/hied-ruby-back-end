@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_095506) do
+ActiveRecord::Schema.define(version: 2022_01_31_134247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2022_01_30_095506) do
     t.jsonb "data", default: {}
   end
 
+  create_table "post_links", force: :cascade do |t|
+    t.string "domain"
+    t.string "path"
+    t.string "post_marker"
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_post_links_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title", default: "New Post"
     t.decimal "pay", default: "0.0"
@@ -73,5 +83,6 @@ ActiveRecord::Schema.define(version: 2022_01_30_095506) do
 
   add_foreign_key "accepted_bids", "posts"
   add_foreign_key "bids", "posts"
+  add_foreign_key "post_links", "posts"
   add_foreign_key "rejected_bids", "posts"
 end

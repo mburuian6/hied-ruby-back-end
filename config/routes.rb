@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   end
 
   resources :post_links do
-
   end
+
+  get '/post_link' => 'post_links#post'
 
   resources :bids, only: %i[create update destroy open_post_bids] do
     get :open_post_bids, on: :collection
