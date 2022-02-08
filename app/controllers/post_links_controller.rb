@@ -1,6 +1,4 @@
 class PostLinksController < ApplicationController
-  before_action :set_post_link, only: %i[ show update destroy ]
-
   # GET /post_links
   def index
     @post_links = PostLink.all
@@ -36,6 +34,18 @@ class PostLinksController < ApplicationController
   # DELETE /post_links/1
   def destroy
     @post_link.destroy
+  end
+
+  def post
+    # domain/post_link?marker=1234
+    post_marker = params[:marker]
+    post = Post.find_by_hash_id(post_marker)
+    unless post
+      render json: { error_message: 'Broken Link' }, status: :not_found
+      return
+    end
+
+    render json: PostSerializer.to_hal(post)
   end
 
   private
