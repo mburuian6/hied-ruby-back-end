@@ -51,6 +51,9 @@ gem 'hashids'
 
 #Asyncronous processing
 gem 'sidekiq', '~>6.4.0'
+
+#jwt
+gem 'jwt'
 # END
 
 group :development, :test do
