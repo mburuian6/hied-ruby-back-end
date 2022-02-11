@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   has_many :rejected_bids, dependent: :destroy
   has_many :accepted_bids, dependent: :destroy
 
+  scope :open_posts, -> { where(closed: false) }
+
   def mark_post_as_closed
     update(closed: true)
   end
