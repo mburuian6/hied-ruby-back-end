@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   skip_before_action :doorkeeper_authorize!, only: [:create]
   
   def create
-    user = User.new(email: user_params[:email], password: user_params[:password])
+    user = User.new(
+      email: user_params[:email],
+      password: user_params[:password],
+      username: user_params[:password]
+    )
     client_app = Doorkeeper::Application.find_by(uid: params[:client_id])
 
     return render(json: { error: 'Unauthorized app'}, status: 403) unless client_app
@@ -24,6 +28,7 @@ class UsersController < ApplicationController
                user: {
                  id: user.id,
                  email: user.email,
+                 username: user.username,
                  access_token: access_token.token,
                  token_type: 'bearer',
                  expires_in: access_token.expires_in,
@@ -32,6 +37,7 @@ class UsersController < ApplicationController
                }
              })
     else
+      puts user.errors.full_messages.to_sentence.downcase
       # log the error
       render(json: { error: 'Unprocessable entity' }, status: 422)
     end
@@ -40,7 +46,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password)
+    params.permit(:email, :password, :username, :client_id, :user)
   end
 
   def generate_refresh_token
