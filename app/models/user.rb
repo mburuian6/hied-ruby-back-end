@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP, uniqueness: true
+  # validates :username, presence: true, uniqueness: true
+
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
     user&.valid_password?(password) ? user : nil
