@@ -46,6 +46,6 @@ class RejectedBidsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rejected_bid_params
-      params.require(:rejected_bid).permit(:pay, :notes, :post_id, :owner)
+      params.require(:rejected_bid).permit(:pay, :notes, :post_id, :username)
     end
 end

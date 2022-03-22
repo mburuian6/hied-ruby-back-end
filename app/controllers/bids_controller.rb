@@ -17,7 +17,7 @@ class BidsController < ApplicationController
   # POST /bids
   def create
     @bid = Bid.new(bid_params)
-    potential_bid = Bid.find_by(owner: @bid.owner, post_id: @bid.post_id)
+    potential_bid = Bid.find_by(username: @bid.username, post_id: @bid.post_id)
     if potential_bid
       if potential_bid.update(pay: @bid.pay, notes: @bid.notes)
         render json: BidSerializer.to_hal(potential_bid)
@@ -84,15 +84,15 @@ class BidsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def bid_params
-    params.require(:bid).permit(:pay, :notes, :post_id, :owner)
+    params.require(:bid).permit(:pay, :notes, :post_id, :username)
   end
 
   def create_accept_notifications(bid)
     Notification.create(
       subject: "Bid for Post #{bid.post.hash_id} accepted",
       message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
-          "been accepted. Please contact #{bid.post.owner} for arrangements",
-      owner: bid.owner,
+          "been accepted. Please contact #{bid.post.username} for arrangements",
+      username: bid.username,
       data: { bid: bid.hash_id }
     )
   end
@@ -102,7 +102,7 @@ class BidsController < ApplicationController
       subject: "Accepted bid for Post #{bid.post.hash_id}",
       message: "You have successfully accepted the bid #{bid.hash_id} for post title #{bid.post.title}, marker: #{bid.post.hash_id}; "\
           "Please contact #{bid.post.title} for arrangements",
-      owner: bid.post.owner,
+      username: bid.post.username,
       notification_references: [bid_notification.id],
       data: { post: bid.post.hash_id }
     )
@@ -114,7 +114,7 @@ class BidsController < ApplicationController
       subject: "Bid for Post #{bid.post.hash_id} rejected",
       message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
           "been rejected. We wish you better luck next time!",
-      owner: bid.owner,
+      username: bid.username,
       data: { bid: bid.hash_id }
     )
   end

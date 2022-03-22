@@ -46,6 +46,6 @@ class AcceptedBidsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def accepted_bid_params
-      params.require(:accepted_bid).permit(:pay, :notes, :post_id, :owner)
+      params.require(:accepted_bid).permit(:pay, :notes, :post_id, :username)
     end
 end

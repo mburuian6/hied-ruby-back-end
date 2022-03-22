@@ -7,7 +7,7 @@ class PostSerializer
   attribute :closed
   attribute :description
   attribute :start
-  attribute :owner
+  attribute :username
   attribute :hash_id
   attribute :created_at
   attribute :updated_at

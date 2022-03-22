@@ -5,7 +5,7 @@ class BidSerializer
   attribute :pay
   attribute :notes
   attribute :post_id
-  attribute :owner
+  attribute :username
   attribute :accepted
   attribute :created_at
   attribute :updated_at

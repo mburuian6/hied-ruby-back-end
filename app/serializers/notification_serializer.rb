@@ -4,7 +4,7 @@ class NotificationSerializer
 
   attribute :subject
   attribute :message
-  attribute :owner
+  attribute :username
   attribute :notification_references
   attribute :data
   attribute :created_at

@@ -39,9 +39,9 @@ class NotificationsController < ApplicationController
   end
 
   def all_notifications
-    owner = params[:owner]
+    username = params[:username]
     render json: NotificationSerializer.to_collection(
-      Notification.order(:updated_at).where(owner: owner)
+      Notification.order(:updated_at).where(username: username)
     )
   end
 
