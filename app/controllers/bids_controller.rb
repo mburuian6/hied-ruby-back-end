@@ -130,15 +130,19 @@ class BidsController < ApplicationController
     )
   end
 
-  def create_accepted_bid(attributes)
+  def create_accepted_bid(bid)
     AcceptedBid.create(
-      attributes.except('accepted', 'id', 'created_at', 'updated_at')
+      bid.attributes
+        .except('accepted', 'id', 'created_at', 'updated_at')
+        .merge(original_bid_created: bid.created_at, original_bid_updated: bid.updated_at)
     )
   end
 
-  def create_rejected_bid(attributes)
+  def create_rejected_bid(bid)
     RejectedBid.create(
-      attributes.except('accepted', 'id', 'created_at', 'updated_at')
+      bid.attributes
+         .except('accepted', 'id', 'created_at', 'updated_at')
+         .merge(original_bid_created: bid.created_at, original_bid_updated: bid.updated_at)
     )
   end
 end
