@@ -62,12 +62,12 @@ class BidsController < ApplicationController
     bids.each do |bid|
       if bid.id.to_s == accepted_bid_id
         bid.accepted = true
-        create_accepted_bid(bid.attributes)
-        bid_notification = create_accept_notifications(bid)
-        create_post_notifications(bid, bid_notification)
+        accepted_bid = create_accepted_bid(bid)
+        bid_notification = create_accept_notifications(accepted_bid)
+        create_post_notifications(accepted_bid, bid_notification)
       else
-        create_rejected_bid(bid.attributes)
-        create_rejection_notifications(bid)
+        rejected_bid = create_rejected_bid(bid)
+        create_rejection_notifications(rejected_bid)
       end
       Bid.destroy(bid.id)
     end
