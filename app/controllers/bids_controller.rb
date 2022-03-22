@@ -87,35 +87,46 @@ class BidsController < ApplicationController
     params.require(:bid).permit(:pay, :notes, :post_id, :username)
   end
 
-  def create_accept_notifications(bid)
+  def create_accept_notifications(accepted_bid)
     Notification.create(
-      subject: "Bid for Post #{bid.post.hash_id} accepted",
-      message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
-          "been accepted. Please contact #{bid.post.username} for arrangements",
-      username: bid.username,
-      data: { bid: bid.hash_id }
+      username: accepted_bid.username,
+      type: :bid_accept,
+      data: {
+        bid: accepted_bid.hash_id,
+        post: accepted_bid.post.hash_id,
+        post_title: accepted_bid.post.title,
+        post_username: accepted_bid.post.username,
+        time: accepted_bid.created_at
+      }
     )
   end
 
-  def create_post_notifications(bid, bid_notification)
-    post_notification = Notification.create(
-      subject: "Accepted bid for Post #{bid.post.hash_id}",
-      message: "You have successfully accepted the bid #{bid.hash_id} for post title #{bid.post.title}, marker: #{bid.post.hash_id}; "\
-          "Please contact #{bid.post.title} for arrangements",
-      username: bid.post.username,
-      notification_references: [bid_notification.id],
-      data: { post: bid.post.hash_id }
+  def create_post_notifications(accepted_bid, bid_notification)
+    Notification.create(
+      username: accepted_bid.post.username,
+      type: :post_accepted_bid,
+      notification_references: [{bid_accepted: bid_notification.id}],
+      data: {
+        bid: accepted_bid.hash_id,
+        post: accepted_bid.post.hash_id,
+        post_title: accepted_bid.post.title,
+        post_username: accepted_bid.post.username,
+        time: accepted_bid.created_at
+      }
     )
     bid_notification.update(notification_references: [post_notification.id])
   end
 
-  def create_rejection_notifications(bid)
+  def create_rejection_notifications(rejected_bid)
     Notification.create(
-      subject: "Bid for Post #{bid.post.hash_id} rejected",
-      message: "Your bid for post titled #{bid.post.title}, marker: #{bid.post.hash_id} has "\
-          "been rejected. We wish you better luck next time!",
-      username: bid.username,
-      data: { bid: bid.hash_id }
+      username: rejected_bid.username,
+      type: :bid_reject,
+      data: {
+        bid: rejected_bid.hash_id,
+        post: rejected_bid.post.hash_id,
+        post_title: rejected_bid.post.title,
+        time: rejected_bid.created_at
+      }
     )
   end
 
