@@ -4,8 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :accepted_bids, foreign_key: 'owner'
+
   validates :email, format: URI::MailTo::EMAIL_REGEXP, uniqueness: true
-  # validates :username, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
