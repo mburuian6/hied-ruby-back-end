@@ -53,6 +53,11 @@ class PostsController < ApplicationController
     render json: PostSerializer.to_collection(@posts)
   end
 
+  def open_posts;
+    username = params[:username]
+    @posts = Post.open_posts.where(username: username)
+    render json: PostSerializer.to_collection(@posts)
+  end
 
   def open_posts; end
 
