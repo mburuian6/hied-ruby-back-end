@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :accepted_bids, foreign_key: 'username'
   has_many :rejected_bids, foreign_key: 'username'
+  has_many :bids, foreign_key: 'username'
+  has_many :notifications, foreign_key: 'username'
+  has_many :posts, foreign_key: 'username'
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP, uniqueness: true
   validates :username, presence: true, uniqueness: true
