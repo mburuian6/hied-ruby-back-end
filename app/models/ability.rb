@@ -36,5 +36,10 @@ class Ability
     can %i[read], AcceptedBid, user_id: user.id
     can %i[read], RejectedBid, user_id: user.id
     can :all_notifications, Notification, user_id: user.id
+    can :post, PostLink
+
+
+    # can :upload_signed_loan_form, LoanApplication,
+    #     status: :approved, business: { user_id: user.id }
   end
 end
