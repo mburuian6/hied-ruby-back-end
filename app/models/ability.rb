@@ -40,7 +40,7 @@ class Ability
     can %i[create update destroy], Bid, user_id: user.id
     can :open_post_bids, Bid
     can :accept_bid, Bid, post: { user_id: user.id }
-    can %i[update destroy], Post, user_id: user.id
     can %i[read create], Post
+    can %i[update destroy closed_posts open_posts], Post, user_id: user.id
   end
 end
