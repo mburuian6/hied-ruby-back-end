@@ -31,5 +31,10 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
+    user ||= User.new
+
+    can %i[read], AcceptedBid, user_id: user.id
+    can %i[read], RejectedBid, user_id: user.id
+    can :all_notifications, Notification, user_id: user.id
   end
 end
