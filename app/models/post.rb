@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   has_one :post_link, dependent: :destroy
   has_many :bids, dependent: :destroy
-  has_many :rejected_bids, dependent: :destroy
-  has_many :accepted_bids, dependent: :destroy
+  has_many :rejected_bids
+  has_many :accepted_bids
   belongs_to :user, foreign_key: 'username'
 
   scope :open_posts, -> { where(closed: false) }
