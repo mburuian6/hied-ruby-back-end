@@ -58,6 +58,7 @@ gem 'jwt'
 # Auth
 gem 'devise'
 gem 'doorkeeper'
+gem 'cancancan'
 # END
 
 group :development, :test do
