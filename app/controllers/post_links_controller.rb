@@ -1,4 +1,6 @@
 class PostLinksController < ApplicationController
+  load_and_authorize_resource
+
   # GET /post_links
   def index
     @post_links = PostLink.all

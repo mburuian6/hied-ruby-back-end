@@ -1,6 +1,7 @@
 require 'manage_hash_ids'
 class BidsController < ApplicationController
   before_action :set_bid, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /bids
   def index

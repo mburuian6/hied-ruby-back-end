@@ -1,5 +1,6 @@
 class RejectedBidsController < ApplicationController
   before_action :set_rejected_bid, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /rejected_bids
   def index

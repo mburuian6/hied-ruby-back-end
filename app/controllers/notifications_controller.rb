@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /notifications
   def index

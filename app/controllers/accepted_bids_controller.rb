@@ -1,5 +1,6 @@
 class AcceptedBidsController < ApplicationController
   before_action :set_accepted_bid, only: %i[ show update destroy ]
+  load_and_authorize_resource
 
   # GET /accepted_bids
   def index

@@ -1,7 +1,8 @@
 require 'manage_hash_ids'
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
-  skip_before_action :doorkeeper_authorize!, only: [:index]
+  skip_before_action :doorkeeper_authorize!, only: [:index, :test]
+  load_and_authorize_resource
 
   # GET /posts
   def index
