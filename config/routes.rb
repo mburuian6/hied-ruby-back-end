@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :posts do
   end
 
-  resources :post_links do
+  resources :post_links, only: :post do
   end
 
   get '/post_link' => 'post_links#post'
