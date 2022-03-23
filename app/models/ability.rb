@@ -42,9 +42,5 @@ class Ability
     can :accept_bid, Bid, post: { user_id: user.id }
     can %i[update destroy], Post, user_id: user.id
     can %i[read create], Post
-
-
-    # can :upload_signed_loan_form, LoanApplication,
-    #     status: :approved, business: { user_id: user.id }
   end
 end
