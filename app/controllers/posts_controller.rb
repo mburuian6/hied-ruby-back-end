@@ -47,7 +47,12 @@ class PostsController < ApplicationController
     @post.destroy
   end
 
-  def closed_posts; end
+  def closed_posts;
+    username = params[:username]
+    @posts = Post.closed_posts.where(username: username)
+    render json: PostSerializer.to_collection(@posts)
+  end
+
 
   def open_posts; end
 
