@@ -37,6 +37,11 @@ class Ability
     can %i[read], RejectedBid, user_id: user.id
     can :all_notifications, Notification, user_id: user.id
     can :post, PostLink
+    can %i[create update destroy], Bid, user_id: user.id
+    can :open_post_bids, Bid
+    can :accept_bid, Bid, post: { user_id: user.id }
+    can %i[update destroy], Post, user_id: user.id
+    can %i[read create], Post
 
 
     # can :upload_signed_loan_form, LoanApplication,
