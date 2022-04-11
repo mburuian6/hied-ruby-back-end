@@ -11,7 +11,7 @@ class BidSerializer
   attribute :updated_at
 
   link :self do
-    "/bids/#{resource.id}"
+    "/bids/#{resource.hash_id}"
   end
 
   collection of: 'bids' do
