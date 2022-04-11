@@ -57,8 +57,9 @@ class BidsController < ApplicationController
   end
 
   def accept_bid
-    post = Post.find(params[:post_id])
-    accepted_bid_id = params[:bid_id]
+    post = Post.find_by(hash_id: params[:post_id]) #TODO: Change these to use markers
+    bid = Bid.find_by(hash_id: params[:bid_id])
+    accepted_bid_id = bid.id.to_s
     bids = post.bids
     bids.each do |bid|
       if bid.id.to_s == accepted_bid_id

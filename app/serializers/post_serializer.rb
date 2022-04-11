@@ -13,7 +13,7 @@ class PostSerializer
   attribute :updated_at
 
   link :self do
-    "/posts/#{resource.id}"
+    "/posts/#{resource.hash_id}" #TODO: Change this to use markers
   end
 
   collection of: 'posts' do
