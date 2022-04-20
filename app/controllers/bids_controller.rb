@@ -23,6 +23,7 @@ class BidsController < ApplicationController
       if potential_bid.update(pay: @bid.pay, notes: @bid.notes)
         render json: BidSerializer.to_hal(potential_bid)
       else
+        BroadcastBidJob.perform_async(@bid)
         render json: potential_bid.errors, status: :unprocessable_entity
       end
       return
