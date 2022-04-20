@@ -30,4 +30,6 @@ Rails.application.routes.draw do
     get :all_notifications, on: :collection
   end
 
+  mount ActionCable.server => '/cable'
+
 end
