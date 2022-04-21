@@ -29,6 +29,7 @@ class PostsController < ApplicationController
                       })
       render json: PostSerializer.to_hal(@post), status: :created, location: @post
     else
+      logger.error("Error: #{@post.errors.full_messages.to_sentence.downcase}")
       render json: @post.errors, status: :unprocessable_entity
     end
   end
