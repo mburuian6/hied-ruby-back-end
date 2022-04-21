@@ -28,7 +28,7 @@ module HiedBackEnd
       g.test_framework :rspec
     end
 
-    config.logger = ActiveSupport::Logger.new('log/application.log')
-    logger = Rails.logger
+    # config.logger = ActiveSupport::Logger.new('log/application.log')
+    # logger = Rails.logger
   end
 end

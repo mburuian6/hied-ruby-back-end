@@ -71,4 +71,8 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :pay, :closed, :description, :start, :username)
   end
+
+  def posts_logger
+    @posts_logger ||= Logger.new("#{Rails.root}/log/posts_logger.log", 'daily')
+  end
 end
