@@ -23,7 +23,7 @@ class PostsController < ApplicationController
       @post.update(hash_id: ManageHashIds.encode(@post.id))
       PostLink.create({
                         domain: Rails.application.credentials.domain,
-                        path: '/post_links/post/',
+                        path: '/post_link',
                         post_marker: @post.hash_id,
                         post_id: @post.id
                       })
