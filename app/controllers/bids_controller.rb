@@ -38,7 +38,7 @@ class BidsController < ApplicationController
       @bid.update(hash_id: ManageHashIds.encode_bid(@bid.id))
       render json: BidSerializer.to_hal(@bid), status: :created, location: @bid
     else
-      render json: @bid.errors, status: :unprocessable_entity
+      render json: @bid.errors.full_messages, status: :unprocessable_entity
     end
   end
 
