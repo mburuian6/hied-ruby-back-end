@@ -82,6 +82,7 @@ class BidsController < ApplicationController
       Bid.destroy(bid.id)
     end
     post.mark_post_as_closed
+    # TODO: Terminate Channel
     render json: nil, status: :ok
   end
 
