@@ -4,10 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :accepted_bids, foreign_key: 'username'
-  has_many :rejected_bids, foreign_key: 'username'
-  has_many :bids, foreign_key: 'username'
-  has_many :notifications, foreign_key: 'username'
+  has_many :accepted_bids, primary_key: :username, foreign_key: :username
+  has_many :rejected_bids, primary_key: :username, foreign_key: :username
+  has_many :bids, primary_key: :username, foreign_key: :username
+  has_many :notifications, primary_key: :username, foreign_key: :username
   has_many :posts, primary_key: :username, foreign_key: :username
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP, uniqueness: true
