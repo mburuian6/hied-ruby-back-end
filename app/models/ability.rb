@@ -33,14 +33,14 @@ class Ability
 
     user ||= User.new
 
-    can %i[read], AcceptedBid, user_id: user.id
-    can %i[read], RejectedBid, user_id: user.id
-    can :all_notifications, Notification, user_id: user.id
+    can %i[read], AcceptedBid, user: user
+    can %i[read], RejectedBid, user: user
+    can :all_notifications, Notification, user: user
     can :post, PostLink
-    can %i[create update destroy], Bid, user_id: user.id
+    can %i[create update destroy], Bid, user: user
     can :open_post_bids, Bid
-    can :accept_bid, Bid, post: { user_id: user.id }
-    can %i[update destroy closed_posts open_posts], Post, user_id: user.id
+    can :accept_bid, Bid, post: { user: user }
+    can %i[update destroy closed_posts open_posts], Post, user: user
     can %i[read create], Post
   end
 end
