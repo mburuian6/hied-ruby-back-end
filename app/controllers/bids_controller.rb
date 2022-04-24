@@ -23,7 +23,9 @@ class BidsController < ApplicationController
       render json: { message: 'Cannot bid for your own post' }, status: :forbidden
       return
     end
-    potential_bid = Bid.find_by(username: @bid.username, post_id: @bid.post_id)
+
+    @bid.post = post
+    potential_bid = Bid.find_by(username: @bid.username, post_id: post.id)
     if potential_bid
       if potential_bid.update(pay: @bid.pay, notes: @bid.notes)
         render json: BidSerializer.to_hal(potential_bid)
