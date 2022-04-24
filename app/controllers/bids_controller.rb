@@ -18,9 +18,9 @@ class BidsController < ApplicationController
   # POST /bids
   def create
     @bid = Bid.new(bid_params)
-    post_user = Post.find_by(hash_id: params[:post_hash_id]).user
-    if @bid.user == post_user
-      render json: { Forbidden: 'Cannot bid for your own post' }, status: :forbidden
+    post = Post.find_by(hash_id: params[:post_hash_id])
+    if @bid.user == post.user
+      render json: { message: 'Cannot bid for your own post' }, status: :forbidden
       return
     end
     potential_bid = Bid.find_by(username: @bid.username, post_id: @bid.post_id)
