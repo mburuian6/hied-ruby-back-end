@@ -108,7 +108,7 @@ class BidsController < ApplicationController
     Notification.create(
       username: accepted_bid.post.username,
       type: :post_accepted_bid,
-      notification_references: [{bid_accepted: bid_notification.id}],
+      notification_references: [{ bid_accepted: bid_notification.id }],
       data: {
         bid: accepted_bid.hash_id,
         post: accepted_bid.post.hash_id,
