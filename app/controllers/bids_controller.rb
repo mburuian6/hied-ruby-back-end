@@ -28,9 +28,9 @@ class BidsController < ApplicationController
     potential_bid = Bid.find_by(username: @bid.username, post_id: post.id)
     if potential_bid
       if potential_bid.update(pay: @bid.pay, notes: @bid.notes)
+        BroadcastBidJob.perform_async(potential_bid.id, post.hash_id)
         render json: BidSerializer.to_hal(potential_bid)
       else
-        BroadcastBidJob.perform_async(@bid)
         render json: potential_bid.errors, status: :unprocessable_entity
       end
       return
@@ -38,6 +38,7 @@ class BidsController < ApplicationController
 
     if @bid.save
       @bid.update(hash_id: ManageHashIds.encode_bid(@bid.id))
+      BroadcastBidJob.perform_async(@bid.id, post.hash_id)
       render json: BidSerializer.to_hal(@bid), status: :created, location: @bid
     else
       render json: @bid.errors.full_messages, status: :unprocessable_entity
