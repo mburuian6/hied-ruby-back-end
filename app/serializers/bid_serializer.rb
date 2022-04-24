@@ -4,11 +4,13 @@ class BidSerializer
 
   attribute :pay
   attribute :notes
-  attribute :post_id
   attribute :username
   attribute :accepted
   attribute :created_at
   attribute :updated_at
+  attribute :post_id do
+    resource.post.hash_id
+  end
 
   link :self do
     "/bids/#{resource.hash_id}"
