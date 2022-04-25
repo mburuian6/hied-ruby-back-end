@@ -102,7 +102,7 @@ class BidsController < ApplicationController
   def create_accept_notifications(accepted_bid)
     Notification.create(
       username: accepted_bid.username,
-      type: :bid_accept,
+      type: :bid_accepted,
       data: {
         bid: accepted_bid.hash_id,
         post: accepted_bid.post.hash_id,
@@ -132,7 +132,7 @@ class BidsController < ApplicationController
   def create_rejection_notifications(rejected_bid)
     Notification.create(
       username: rejected_bid.username,
-      type: :bid_reject,
+      type: :bid_rejected,
       data: {
         bid: rejected_bid.hash_id,
         post: rejected_bid.post.hash_id,
