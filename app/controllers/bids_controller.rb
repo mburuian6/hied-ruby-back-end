@@ -65,6 +65,7 @@ class BidsController < ApplicationController
     render json: BidSerializer.to_collection(bids)
   end
 
+  # TODO: Reject bids in the background
   def accept_bid
     post = Post.find_by(hash_id: params[:post_id])
     bid = Bid.find_by(hash_id: params[:bid_id])
