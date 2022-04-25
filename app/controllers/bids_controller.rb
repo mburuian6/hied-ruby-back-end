@@ -67,8 +67,9 @@ class BidsController < ApplicationController
 
   # TODO: Reject bids in the background
   def accept_bid
-    post = Post.find_by(hash_id: params[:post_id])
-    bid = Bid.find_by(hash_id: params[:bid_id])
+    post = Post.find_by(hash_id: params[:post_hash_id])
+    bid = Bid.find_by(hash_id: params[:bid_hash_id])
+
     accepted_bid_id = bid.id.to_s
     bids = post.bids
     bids.each do |bid|
