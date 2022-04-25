@@ -2,7 +2,7 @@ HALPresenter.base_href = 'http://localhost:8080/'
 class NotificationSerializer
   extend HALPresenter
 
-  attribute :type
+  attribute :notification_type
   attribute :username
   attribute :notification_references
   attribute :data
