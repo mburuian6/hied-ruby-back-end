@@ -83,7 +83,7 @@ class BidsController < ApplicationController
       Bid.destroy(bid.id)
     end
     post.mark_post_as_closed
-    # TODO: Terminate Channel
+    ActionCable::Channel::Streams.stop_stream_from("bids_#{post.hash_id}")
     render json: nil, status: :ok
   end
 
