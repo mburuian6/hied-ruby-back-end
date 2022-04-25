@@ -121,7 +121,7 @@ class BidsController < ApplicationController
   end
 
   def create_post_notifications(accepted_bid, bid_notification)
-    Notification.create(
+    post_notification = Notification.create(
       username: accepted_bid.post.username,
       notification_type: :post_accepted_bid,
       notification_references: [{ bid_accepted: bid_notification.id }],
