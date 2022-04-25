@@ -70,6 +70,11 @@ class BidsController < ApplicationController
     post = Post.find_by(hash_id: params[:post_hash_id])
     bid = Bid.find_by(hash_id: params[:bid_hash_id])
 
+    unless post.user == current_user
+      render status: 401
+      return
+    end
+
     accepted_bid_id = bid.id.to_s
     bids = post.bids
     bids.each do |bid|
