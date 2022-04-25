@@ -8,6 +8,7 @@ class BidSerializer
   attribute :accepted
   attribute :created_at
   attribute :updated_at
+  attribute :hash_id
   attribute :post_id do
     resource.post.hash_id
   end
