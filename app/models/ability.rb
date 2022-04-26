@@ -35,7 +35,7 @@ class Ability
 
     can %i[read], AcceptedBid, user: user
     can %i[read], RejectedBid, user: user
-    can :all_notifications, Notification, user: user
+    can :all_notifications, Notification, username: user.username
     can :post, PostLink
     can %i[create update destroy], Bid, user: user
     can :open_post_bids, Bid
