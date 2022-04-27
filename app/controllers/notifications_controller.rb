@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: %i[ show update destroy ]
+  before_action :set_username, only: [:all_notifications]
   load_and_authorize_resource
 
   def all_notifications
