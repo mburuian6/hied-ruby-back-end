@@ -3,9 +3,8 @@ class NotificationsController < ApplicationController
   load_and_authorize_resource
 
   def all_notifications
-    username = params[:username]
     render json: NotificationSerializer.to_collection(
-      Notification.order(:updated_at).where(username: username)
+      Notification.order(:updated_at).where(username: @username)
     )
   end
 
