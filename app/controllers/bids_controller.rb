@@ -116,6 +116,7 @@ class BidsController < ApplicationController
         post: accepted_bid.post.hash_id,
         post_title: accepted_bid.post.title,
         post_username: accepted_bid.post.username,
+        post_link: accepted_bid.post.post_link,
         time: accepted_bid.created_at
       }
     )
@@ -128,9 +129,12 @@ class BidsController < ApplicationController
       notification_references: [{ bid_accepted: bid_notification.id }],
       data: {
         bid: accepted_bid.hash_id,
+        bid_pay: accepted_bid.pay,
+        bid_user: accepted_bid.username,
         post: accepted_bid.post.hash_id,
         post_title: accepted_bid.post.title,
         post_username: accepted_bid.post.username,
+        post_link: accepted_bid.post.post_link,
         time: accepted_bid.created_at
       }
     )
@@ -145,6 +149,7 @@ class BidsController < ApplicationController
         bid: rejected_bid.hash_id,
         post: rejected_bid.post.hash_id,
         post_title: rejected_bid.post.title,
+        post_link: rejected_bid.post.post_link,
         time: rejected_bid.created_at
       }
     )
