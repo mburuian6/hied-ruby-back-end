@@ -10,11 +10,12 @@ class NotificationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_notification
-      @notification = Notification.find(params[:id])
-    end
 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_username
+    params_username = params[:username]
+    @username = params_username if params_username.to_s == current_user.username.to_s
+  end
 
   # Only allow a list of trusted parameters through.
   def notification_params
