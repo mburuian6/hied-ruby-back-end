@@ -49,6 +49,17 @@ class UsersController < ApplicationController
       render status: :not_found
     end
   end
+
+  def update_profile
+    user = User.find_by(username: params[:username])
+    if user&.username == current_user.username
+      if user.update(email: params[:email])
+        render json: UserSerializer.to_hal(user), status: :ok
+      else
+        render json: { error: 'Unprocessable entity' }, status: :unprocessable_entity
+      end
+    else
+      render status: :not_found
     end
   end
 
