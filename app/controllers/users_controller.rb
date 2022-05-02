@@ -37,7 +37,10 @@ class UsersController < ApplicationController
     else
       puts user.errors.full_messages.to_sentence.downcase
       # log the error
-      render(json: { error: 'Unprocessable entity' }, status: 422)
+      render(json: { error: 'Unprocessable entity' }, status: :unprocessable_entity)
+    end
+  end
+
   def profile
     user = User.find_by(username: params[:username])
     if user
