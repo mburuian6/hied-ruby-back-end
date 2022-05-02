@@ -63,6 +63,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def user_statistics
+    user = User.find_by(username: params[:username])
+    if user&.username == current_user.username
+      stats = {
+        last_login: Doorkeeper::AccessToken.order(:created_at)
+                                           .where(resource_owner_id: user.id)
+                                           .last
+                                           .created_at,
+        posts: Post.where(username: resource.username).size,
+        accepted_bids: AcceptedBid.where(username: resource.username).size,
+        rejected_bids: RejectedBid.where(username: resource.username).size
+      }
+      render json: { statistics: stats }, status: :ok
+    else
+      render status: :not_found
+    end
+  end
+
   private
 
   def user_params
