@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   end
   # devise_for :users
 
-  resources :users, only: %i[create]
+  resources :users, only: %i[create profile] do
+    get :profile, on: :collection
+    put :update_profile, on: :collection
+  end
 
   # Defines the root path route ("/")
   root "posts#index"
