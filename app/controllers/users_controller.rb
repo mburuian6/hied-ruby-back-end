@@ -53,7 +53,8 @@ class UsersController < ApplicationController
   def update_profile
     user = User.find_by(username: params[:username])
     email = params[:email]
-    if user&.username == current_user.username && !User.find_by(email: email)
+    potential_user = User.find_by(email: email)
+    if user&.username == current_user.username && !potential_user
       if user.update(email: email)
         render json: UserSerializer.to_hal(user), status: :ok
       else
