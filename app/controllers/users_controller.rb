@@ -52,14 +52,15 @@ class UsersController < ApplicationController
 
   def update_profile
     user = User.find_by(username: params[:username])
-    if user&.username == current_user.username
-      if user.update(email: params[:email])
+    email = params[:email]
+    if user&.username == current_user.username && !User.find_by(email: email)
+      if user.update(email: email)
         render json: UserSerializer.to_hal(user), status: :ok
       else
         render json: { error: 'Unprocessable entity' }, status: :unprocessable_entity
       end
     else
-      render status: :not_found
+      render status: :unauthorized
     end
   end
 
