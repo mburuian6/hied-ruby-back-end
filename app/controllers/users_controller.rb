@@ -73,9 +73,9 @@ class UsersController < ApplicationController
                                            .where(resource_owner_id: user.id)
                                            .last
                                            .created_at,
-        posts: Post.where(username: resource.username).size,
-        accepted_bids: AcceptedBid.where(username: resource.username).size,
-        rejected_bids: RejectedBid.where(username: resource.username).size
+        posts: Post.where(username: resource.username).map { |p| p.attributes.except(:id) },
+        accepted_bids: AcceptedBid.where(username: resource.username).map { |a| a.attributes.except(:id) },
+        rejected_bids: RejectedBid.where(username: resource.username).map { |r| r.attributes.except(:id) }
       }
       render json: { statistics: stats }, status: :ok
     else
