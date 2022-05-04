@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[create profile] do
     get :profile, on: :collection
+    get :user_statistics, on: :collection
     put :update_profile, on: :collection
   end
 
