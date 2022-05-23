@@ -6,7 +6,7 @@ class Notification < ApplicationRecord
 
   belongs_to :user, primary_key: :username, foreign_key: :username
 
-  after_create update_hash_id
+  after_create :update_hash_id
 
   def update_hash_id
     update(hash_id: ManageHashIds.encode(id))
