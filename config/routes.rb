@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: %i[all_notifications] do
     get :all_notifications, on: :collection
+    get :mark_read, on: :collection
   end
 
   mount ActionCable.server => '/cable'

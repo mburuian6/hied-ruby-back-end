@@ -8,6 +8,15 @@ class NotificationsController < ApplicationController
     )
   end
 
+  def mark_read
+    notification = Notification.find_by(hash_id: params[:hash_id])
+    if notification.opened!
+      render json: nil, status: :ok
+    else
+      render json: notification, status: :unprocessable_entity
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
