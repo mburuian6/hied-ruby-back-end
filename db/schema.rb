@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_23_133131) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_141436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_23_133131) do
     t.jsonb "data", default: {}
     t.integer "notification_type"
     t.string "hash_id"
+    t.integer "notification_opened"
     t.index ["username"], name: "index_notifications_on_username"
   end
 
