@@ -30,9 +30,9 @@ Rails.application.routes.draw do
 
   resources :accepted_bids, only: []
 
-  resources :notifications, only: %i[all_notifications] do
+  resources :notifications, only: %i[all_notifications mark_read] do
     get :all_notifications, on: :collection
-    get :mark_read, on: :collection
+    put :mark_read, on: :collection
   end
 
   mount ActionCable.server => '/cable'
