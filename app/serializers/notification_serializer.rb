@@ -12,7 +12,7 @@ class NotificationSerializer
   attribute :notification_opened
 
   link :self do
-    "/notifications/#{resource.id}"
+    "/notifications/#{resource.hash_id}"
   end
 
   collection of: 'notifications' do
