@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
 
   def all_notifications
     render json: NotificationSerializer.to_collection(
-      Notification.order(:updated_at).where(username: @username)
+      Notification.order(notification_opened: :desc, updated_at: :desc).where(username: @username)
     )
   end
 
