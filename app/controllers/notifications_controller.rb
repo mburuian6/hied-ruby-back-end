@@ -11,9 +11,9 @@ class NotificationsController < ApplicationController
   def mark_read
     notification = Notification.find_by(hash_id: params[:hash_id])
     if notification.opened!
-      render json: nil, status: :ok
+      render json: NotificationSerializer.to_hal(notification), status: :ok
     else
-      render json: notification, status: :unprocessable_entity
+      render json: NotificationSerializer.to_hal(notification), status: :unprocessable_entity
     end
   end
 
