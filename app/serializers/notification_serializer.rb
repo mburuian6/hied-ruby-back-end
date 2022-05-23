@@ -8,6 +8,8 @@ class NotificationSerializer
   attribute :data
   attribute :created_at
   attribute :updated_at
+  attribute :hash_id
+  attribute :notification_opened
 
   link :self do
     "/notifications/#{resource.id}"
