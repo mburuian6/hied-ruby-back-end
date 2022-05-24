@@ -9,6 +9,9 @@ class Post < ApplicationRecord
   scope :open_posts, -> { where(closed: false) }
   scope :closed_posts, -> { where(closed: true) }
 
+  validates :title, :pay, :start, :username, presence: true
+  validates :pay, numericality: { greater_than: 0, message: '%{attribute} must be 0 or more' }
+
   def mark_post_as_closed
     update(closed: true)
   end
