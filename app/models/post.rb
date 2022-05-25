@@ -31,4 +31,7 @@ class Post < ApplicationRecord
       "#{e.backtrace.join("\n\t")}")
   end
 
+  def posts_logger
+    @posts_logger ||= Logger.new("#{Rails.root}/log/posts_model_logger.log", 'daily')
+  end
 end
