@@ -60,6 +60,10 @@ class PostsController < ApplicationController
     render json: PostSerializer.to_collection(@posts)
   end
 
+  def locations
+    render json: Post.locations
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

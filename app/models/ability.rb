@@ -42,6 +42,6 @@ class Ability
     can :open_post_bids, Bid
     can :accept_bid, Bid, post: { user: user }
     can %i[update destroy closed_posts open_posts], Post, user: user
-    can %i[read create], Post
+    can %i[read create locations], Post
   end
 end
