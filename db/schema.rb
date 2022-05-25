@@ -70,6 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_25_093634) do
   end
 
   create_table "coordinates", force: :cascade do |t|
+    t.string "latitude"
+    t.string "longitude"
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
