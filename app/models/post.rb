@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many :bids, dependent: :destroy
   has_many :rejected_bids
   has_many :accepted_bids
+  has_one :coordinate
   belongs_to :user, primary_key: :username, foreign_key: :username
   # belongs_to_model: foreign_key, has_many_model: primary_key
 
