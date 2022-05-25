@@ -18,4 +18,17 @@ class Post < ApplicationRecord
     update(closed: true)
   end
 
+  def save_coordinate(latitude, longitude)
+    return unless physical?
+
+    if coordinate
+      coordinate.update({ latitude: latitude, longitude: longitude })
+    else
+      Coordinate.create({ post: self, longitude: longitude, latitude: latitude })
+    end
+  rescue StandardError => e
+    @posts_logger.error("Error saving coordinates: #{e.message} \n "\
+      "#{e.backtrace.join("\n\t")}")
+  end
+
 end
