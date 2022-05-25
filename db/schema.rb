@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_24_130054) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_25_093634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_130054) do
     t.string "hash_id"
     t.index ["post_id"], name: "index_bids_on_post_id"
     t.index ["username"], name: "index_bids_on_username"
+  end
+
+  create_table "coordinates", force: :cascade do |t|
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_coordinates_on_post_id"
   end
 
   create_table "notifications", force: :cascade do |t|
