@@ -18,7 +18,8 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-
+    latitude = params[:latitude]
+    longitude = params[:longitude]
     if @post.save
       @post.update(hash_id: ManageHashIds.encode(@post.id))
       PostLink.create({
@@ -27,6 +28,7 @@ class PostsController < ApplicationController
                         post_marker: @post.hash_id,
                         post_id: @post.id
                       })
+      @post.save_coordinate(latitude, longitude)
       render json: PostSerializer.to_hal(@post), status: :created, location: @post
     else
       logger.error("Error: #{@post.errors.full_messages.to_sentence.downcase}")
