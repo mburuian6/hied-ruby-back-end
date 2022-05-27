@@ -139,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_041256) do
     t.datetime "start", default: "2022-01-28 11:42:25", null: false
     t.string "hash_id"
     t.integer "location"
-    t.text "tags", default: [], array: true
+    t.string "tags", default: ""
     t.index ["username"], name: "index_posts_on_username"
   end
 
