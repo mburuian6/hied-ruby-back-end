@@ -15,6 +15,7 @@ class PostSerializer
   attribute :coordinate do
     { latitude: resource.coordinate&.latitude, longitude: resource.coordinate&.longitude } if resource.physical?
   end
+  attribute :tags
 
   link :self do
     "/post_link?marker=#{resource.hash_id}"
