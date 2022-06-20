@@ -1,6 +1,7 @@
 HALPresenter.base_href = 'http://localhost:8080/'
 class PostSerializer
   extend HALPresenter
+  include Rails.application.routes.url_helpers
 
   attribute :title
   attribute :pay
@@ -11,6 +12,9 @@ class PostSerializer
   attribute :hash_id
   attribute :created_at
   attribute :updated_at
+  attribute :images do
+    resource.images.map { |image| { url: rails_blob_url(image) } } if resource.images.attached?
+  end
   attribute :location
   attribute :coordinate do
     { latitude: resource.coordinate&.latitude, longitude: resource.coordinate&.longitude } if resource.physical?
