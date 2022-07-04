@@ -30,4 +30,9 @@ class User < ApplicationRecord
   def self.searchable_columns
     [:username]
   end
+
+  # search
+  def search_term(term)
+    Post.fuzzy_search({username: term })
+  end
 end

@@ -36,8 +36,12 @@ class Post < ApplicationRecord
     @posts_logger ||= Logger.new("#{Rails.root}/log/posts_model_logger.log", 'daily')
   end
 
+  # search
   def self.searchable_columns
     [:title, :description, :username, :start]
   end
 
+  def search_term(term)
+    Post.fuzzy_search({ title: term, description: term, username: term }, false)
+  end
 end
