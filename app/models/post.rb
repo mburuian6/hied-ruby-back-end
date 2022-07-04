@@ -35,4 +35,9 @@ class Post < ApplicationRecord
   def posts_logger
     @posts_logger ||= Logger.new("#{Rails.root}/log/posts_model_logger.log", 'daily')
   end
+
+  def self.searchable_columns
+    [:title, :description, :username, :start]
+  end
+
 end

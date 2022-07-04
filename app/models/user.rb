@@ -23,4 +23,7 @@ class User < ApplicationRecord
     #          foreign_key: :resource_owner_id,
     #          dependent: :delete_all # or :destroy if you need callbacks
 
+  def self.searchable_columns
+    [:username]
+  end
 end
