@@ -74,7 +74,7 @@ class PostsController < ApplicationController
     end
 
     found_posts = Post.search(search_term)
-    unless found_posts
+    unless found_posts && !found_posts.empty?
       render json: { posts: PostSerializer.to_collection(Post.all.limit(20)), search: true, empty: false, found: false }
       return
     end
