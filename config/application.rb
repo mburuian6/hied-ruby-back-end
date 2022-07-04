@@ -31,5 +31,7 @@ module HiedBackEnd
 
     # config.logger = ActiveSupport::Logger.new('log/application.log')
     # logger = Rails.logger
+
+    # ActiveRecord::Base.connection.execute("SELECT set_limit(0.6);")
   end
 end
