@@ -23,6 +23,10 @@ class User < ApplicationRecord
     #          foreign_key: :resource_owner_id,
     #          dependent: :delete_all # or :destroy if you need callbacks
 
+  def users_logger
+    @users_logger ||= Logger.new("#{Rails.root}/log/users_model_logger.log", 'daily')
+  end
+
   def self.searchable_columns
     [:username]
   end
