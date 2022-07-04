@@ -41,7 +41,7 @@ class Post < ApplicationRecord
     [:title, :description, :username, :start]
   end
 
-  def search_term(term)
+  def self.search(term)
     Post.fuzzy_search({ title: term, description: term, username: term }, false)
   end
 end
