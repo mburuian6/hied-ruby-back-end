@@ -66,6 +66,22 @@ class PostsController < ApplicationController
     render json: Post.locations
   end
 
+  def search
+    search_term = params[:search_term]
+    unless search_term
+      render json: { posts: PostSerializer.to_collection(Post.all.limit(20)), search: true, empty: true, found: false }
+      return
+    end
+
+    found_posts = Post.search(search_term)
+    unless found_posts
+      render json: { posts: PostSerializer.to_collection(Post.all.limit(20)), search: true, empty: false, found: false }
+      return
+    end
+
+    render json: { posts: PostSerializer.to_collection(found_posts), search:true, empty: false, found: true }
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
