@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root "posts#index"
 
   resources :posts do
+    get :search, on: :collection
   end
 
   resources :post_links, only: :post do
