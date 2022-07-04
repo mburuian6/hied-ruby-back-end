@@ -245,6 +245,8 @@ GEM
       rack (~> 2.0)
       redis (>= 4.2.0)
     strscan (3.0.1)
+    textacular (5.5.1)
+      activerecord (>= 5.0, < 7.1)
     thor (1.2.1)
     timeout (0.2.0)
     tzinfo (2.0.4)
@@ -289,6 +291,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sidekiq (~> 6.4.0)
+  textacular
   tzinfo-data
   yard
 

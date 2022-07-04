@@ -59,6 +59,10 @@ gem 'jwt'
 gem 'devise'
 gem 'doorkeeper'
 gem 'cancancan'
+
+# search
+gem 'textacular'
+
 # END
 
 group :development, :test do
