@@ -12,7 +12,6 @@
 /db/*.sqlite3-*
 *.rbc
 capybara-*.html
-.rspec
 /db/*.sqlite3-journal
 /db/*.sqlite3-[0-9]*
 /public/system
